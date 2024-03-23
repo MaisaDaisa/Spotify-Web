@@ -1,51 +1,53 @@
-import  React from "react";
-import { authorize} from "./lib/API/authorize";
-import useRefreshToken from "./lib/API/useRefreshToken.js";
-import MainLayout from "./components/layout/MainLayout/MainLayout.jsx"; 
-import * as ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import './index.css'
+import React, { createContext } from "react";
+import { authorize } from "./lib/API/authorize";
+import dealWithToken from "./lib/API/dealWithToken.js";
+import MainLayout from "./components/layout/MainLayout/MainLayout.jsx";
+import { useCookies } from "react-cookie";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
 
-const router = createBrowserRouter(
-[
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/player",
-    element: <MainLayout />,
-  },
-  {
-    path: "/explore",
-    element: <MainLayout />,
-  },
-]
-);
-
+const router = createBrowserRouter([
+	{
+		path: "/",
+		element: <App />,
+	},
+	{
+		path: "/player",
+		element: <MainLayout />,
+	},
+	{
+		path: "/explore",
+		element: <MainLayout />,
+	},
+]);
 
 function App() {
-  const searchParams = new URLSearchParams(window.location.search);
-  const code = searchParams.get("code");
-  if (code) {
-    useRefreshToken(code);
-  }
-  return (
-    <>
-      <div className= {`flex h-dvh flex-col ${!code ? "items-center justify-center" : " "} p-4 bg-background-pitch-black`}>
-      {code ? (
-          <MainLayout />
-      ) : (
-        <button className="p-3 bg-green-500" onClick={authorize}>
-          Click Me
-        </button>
-      )}
-    </div>
-    </>
-  )
+	const [cookie, setCookie] = useCookies(["spotiCookies"]);
+	let code = "";
+	const searchParams = new URLSearchParams(window.location.search);
+	const codeParam = searchParams.get("code");
+
+	if (codeParam && codeParam !== "" && code !== codeParam) {
+		code = codeParam;
+	}
+	dealWithToken(code);
+
+	return (
+		<>
+			<div
+				className={`flex h-dvh flex-col ${
+					!cookie.spotiCookies ? "items-center justify-center" : " "
+				} p-4 bg-background-pitch-black`}>
+				{cookie.spotiCookies ? (
+					<MainLayout />
+				) : (
+					<button className="p-3 bg-green-500" onClick={authorize}>
+						Click Me
+					</button>
+				)}
+			</div>
+		</>
+	);
 }
 
-export default App
+export default App;

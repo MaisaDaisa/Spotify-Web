@@ -91,8 +91,11 @@ export const refreshSpotifyToken = async (refresh_token) => {
 			body: body,
 		});
 
-		return response.json();
+		data = await response.json();
+		console.log(data, "data");
+		return data;
 	} catch (error) {
 		window.location.href = "/";
 	}
 };
+

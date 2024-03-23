@@ -9,3 +9,7 @@
     width: 100%;
 
 }
+
+.bottom-player-text::-webkit-scrollbar {
+    display: none;
+}

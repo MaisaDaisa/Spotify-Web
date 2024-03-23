@@ -1,4 +1,8 @@
 /* GLOBAL CLASSES */
+
+::root {
+  ---spotify-dark-gree: #1DB954;
+}
 .main-text {
     color: #FFF;
     font-family: Inter;
