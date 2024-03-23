@@ -1,0 +1,11 @@
+.spoti-slider { 
+    -webkit-appearance: none;
+    border-radius: 1rem;
+    background-color: #db0000;
+    cursor: pointer;
+    height: 0.4rem;
+    margin: 0 auto;
+    opacity: 1;
+    width: 100%;
+
+}
