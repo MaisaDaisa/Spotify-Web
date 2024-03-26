@@ -42,8 +42,8 @@ const BottomPlayer = () => {
                         <h1 className="font-bold text-lg">{currentName}</h1>
                     </div>
 					<div className="flex flex-row text-nowrap gap-1  bottom-player-text  overflow-x-scroll ">
-						{currentArtist.map((artist) => {
-							return <p className="text-sm" key={artist.id}>{artist.name}, </p>;
+						{currentArtist.map((artist, index) => {
+							return <p className="text-sm" key={artist.id}>{artist.name}{currentArtist.length - 1 === index ? ' ' : ", "} </p>;
 						})}
 					</div>
 				</div>
