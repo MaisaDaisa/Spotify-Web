@@ -30,25 +30,25 @@ if (typeof window !== "undefined") {
 }
 
 export const authorize = async () => {
-	generateCodeChallenge(codeVerifier).then((codeChallenge) => {
-		const state = generateRandomString(16);
-		const scope =
-			"user-read-private user-read-email streaming user-read-playback-state user-modify-playback-state";
+    generateCodeChallenge(codeVerifier).then((codeChallenge) => {
+        const state = generateRandomString(16);
+        const scope =
+            "user-read-private user-read-email streaming user-read-playback-state user-modify-playback-state user-read-currently-playing user-library-read user-top-read";
+        console.log(scope);
+        sessionStorage.setItem("code_verifier", codeVerifier);
 
-		sessionStorage.setItem("code_verifier", codeVerifier);
+        const args = new URLSearchParams({
+            response_type: "code",
+            client_id: CLIENT_ID,
+            scope: scope,
+            redirect_uri: REDIRECT_URI,
+            state: state,
+            code_challenge_method: "S256",
+            code_challenge: codeChallenge,
+        });
 
-		const args = new URLSearchParams({
-			response_type: "code",
-			client_id: CLIENT_ID,
-			scope: scope,
-			redirect_uri: REDIRECT_URI,
-			state: state,
-			code_challenge_method: "S256",
-			code_challenge: codeChallenge,
-		});
-
-		window.location.href = "https://accounts.spotify.com/authorize?" + args;
-	});
+        window.location.href = "https://accounts.spotify.com/authorize?" + args;
+    });
 };
 
 export const getToken = async (code) => {
@@ -91,11 +91,11 @@ export const refreshSpotifyToken = async (refresh_token) => {
 			body: body,
 		});
 
-		data = await response.json();
-		console.log(data, "data");
+		const data = await response.json();
 		return data;
 	} catch (error) {
-		window.location.href = "/";
+		console.log('Token Aint Refreshing');
+		console.log(error);
 	}
 };
 

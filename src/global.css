@@ -1,13 +1,39 @@
 /* GLOBAL CLASSES */
 
-::root {
-  ---spotify-dark-gree: #1DB954;
-}
 .main-text {
-    color: #FFF;
-    font-family: Inter;
-    font-size: 1.5rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-  }
+	color: #fff;
+	font-family: Inter;
+	font-size: 1.5rem;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
+.spoti-scrollbar-vert::-webkit-scrollbar {
+	width: 2px;
+	cursor: pointer;
+}
+.spoti-scrollbar-vert::-webkit-scrollbar-track {
+	background-color: #000000;
+	cursor: pointer;
+}
+.spoti-scrollbar-vert::-webkit-scrollbar-thumb {
+	cursor: pointer;
+	background-color: #1db954;
+	width: 4px;
+}
+
+
+.spoti-scrollbar-horiz::-webkit-scrollbar {
+	height: 2px;
+	cursor: pointer;
+}
+.spoti-scrollbar-horiz::-webkit-scrollbar-track {
+	background-color: #000000;
+	cursor: pointer;
+}
+.spoti-scrollbar-horiz::-webkit-scrollbar-thumb {
+	cursor: pointer;
+	background-color: #1db954;
+	height: 4px;
+}

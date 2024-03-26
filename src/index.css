@@ -2,11 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+::root {
+	--spotify-dark-green: #1db954;
+}
 
 /* Box sizing rules */
 *,
 *::before,
 *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 

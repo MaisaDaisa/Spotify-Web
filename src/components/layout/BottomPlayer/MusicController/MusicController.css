@@ -1,0 +1,37 @@
+
+.bottom-player-text::-webkit-scrollbar {
+	display: none;
+}
+
+.progress-slider {
+  width: 100%;
+}
+
+.progress-slider,
+.progress-slider::-webkit-slider-runnable-track,
+.progress-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+.progress-slider::-webkit-slider-runnable-track {
+  height: 10px;
+  background: linear-gradient(to right, #293043, #293043), #D7D7D7;
+  background-size: var(--background-size, 0%) 100%;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  border: none; /* Remove border */
+}
+
+.progress-slider::-webkit-slider-thumb {
+  position: relative;
+  top: 3.5px;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  background: #293043;
+  border: solid white 1px;
+  border-radius: 50%;
+  margin-top: -6px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+}
+

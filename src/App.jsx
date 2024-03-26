@@ -1,28 +1,13 @@
-import React, { createContext } from "react";
+import React from "react";
 import { authorize } from "./lib/API/authorize";
 import dealWithToken from "./lib/API/dealWithToken.js";
 import MainLayout from "./components/layout/MainLayout/MainLayout.jsx";
 import { useCookies } from "react-cookie";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
-const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <App />,
-	},
-	{
-		path: "/player",
-		element: <MainLayout />,
-	},
-	{
-		path: "/explore",
-		element: <MainLayout />,
-	},
-]);
 
 function App() {
-	const [cookie, setCookie] = useCookies(["spotiCookies"]);
+	const [cookie] = useCookies(["spotiCookies"]);
 	let code = "";
 	const searchParams = new URLSearchParams(window.location.search);
 	const codeParam = searchParams.get("code");
@@ -35,7 +20,7 @@ function App() {
 	return (
 		<>
 			<div
-				className={`flex h-dvh flex-col ${
+				className={`flex h-screen w-svw flex-col ${
 					!cookie.spotiCookies ? "items-center justify-center" : " "
 				} p-4 bg-background-pitch-black`}>
 				{cookie.spotiCookies ? (
