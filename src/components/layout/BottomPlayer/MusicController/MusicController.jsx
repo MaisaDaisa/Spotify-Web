@@ -140,11 +140,19 @@ const MusicController = () => {
 				/>
 			</div>
 			<div className="flex flex-row flex-nowrap gap-4 w-full">
-				<MusicDurationController
+				{ currentlyPlaying.item ? (
+					<MusicDurationController
 					time={timeIntoSong}
 					customClass={"time-left"}
 					increment={true}
-				/>
+				/>) : (
+					<MusicDurationController
+					time={0}
+					customClass={"time-left"}
+					increment={true}
+				/>)
+
+				}
 				<input
 					type="range"
 					name="progress"
@@ -158,11 +166,18 @@ const MusicController = () => {
 						handleTimePosition(e);
 					}}
 				/>
+				{ currentlyPlaying.item ? (
 				<MusicDurationController
 					time={totalTime}
 					customClass={"time-right"}
 					increment={false}
-				/>
+				/>) : (
+					<MusicDurationController
+					time={0}
+					customClass={"time-left"}
+					increment={true}
+				/>)
+				}
 			</div>
 		</div>
 	);
