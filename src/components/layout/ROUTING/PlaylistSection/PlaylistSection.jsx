@@ -40,6 +40,9 @@ const PlaylistSection = ({ additionalClass }) => {
 
 	useEffect(() => {
 		if (!PlaylistCreator.display_name) return;
+		GetUser(PlaylistCreator.id).then((response) => {
+			setPlaylistCreatorPicture(response.images[0].url);
+		});
 	}, [PlaylistCreator]);
 
 	return (

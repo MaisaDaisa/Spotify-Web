@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import Nas from "../../assets/images/nas.jpg";
+import { useNavigate } from "react-router-dom";
 
-const PlaylistDisplayCover = (name, imgSrc, uri) => {
+const PlaylistDisplayCover = (name, imgSrc, id) => {
+	const navigate = useNavigate()
 	const [ stateName, setName ] = useState(name);
 	const [ stateImgSrc, setImgSrc ] = useState(imgSrc);
-	const [ stateUri, setUri ] = useState(uri);
+	const [ stateId, setId ] = useState(id);
+
+	// console.log(stateName, stateImgSrc, stateId)
+
+	function handleClick() {
+		navigate(`/playlist/${stateId}`)
+	}
 	return (
-		<div className="flex flex-col  items-center gap-2 flex-shrink-0 w-[160px]">
+		<div className="flex flex-col cursor-pointer items-center gap-2 flex-shrink-0 w-[160px]"
+		onClick={handleClick}>
 			<img
 				src={stateImgSrc ? stateImgSrc : Nas}
 				alt=""

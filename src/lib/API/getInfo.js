@@ -104,6 +104,10 @@ export async function GetSeveralBrowseCategories(nextLink) {
 	return await fetchWithToken(link);
 }
 
+export async function GetAvailableDevices() {
+	return await fetchWithToken("https://api.spotify.com/v1/me/player/devices");
+}
+
 // API PUT REQUESTS //
 
 const putWithToken = async (url) => {
@@ -140,27 +144,57 @@ export function volumeControl(volume) {
 	);
 }
 
-export const PlaySpecificSong = async (
-	contextUri,
-	offsetPosition = 0,
-	positionMs = 0
+export const PlaySpecificSongInPlaylist = async (
+	playlistUri,
+	trackUri,
 ) => {
 	const token = getTokenFromCookies();
-	const url = "https://api.spotify.com/v1/me/player/play";
-	const data = {
-		context_uri: contextUri,
-		offset: { position: offsetPosition },
-		position_ms: positionMs,
-	};
-
-	const response = await fetchWithToken(url, "PUT", JSON.stringify(data));
-
-	if (!response.ok) {
-		throw new Error("Failed to play context");
-	}
-
-	return await response.json();
+	try {
+        const response = await fetch('https://api.spotify.com/v1/me/player/play', {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                context_uri: `${playlistUri}`,
+                offset: {
+                    uri: `${trackUri}`
+                },
+                position_ms: 0
+            })
+        });
+        const data = await response.json();
+        console.log(data); // Log the response (optional)
+    } catch (error) {
+        console.error('Error playing track:', error);
+    }
 };
+
+export const ToggleShuffle = async (state) => {
+	return await putWithToken(`https://api.spotify.com/v1/me/player/shuffle?state=${state}`);
+}
+
+export const PlaySpecificSong = async (trackUri) => {
+	const token = getTokenFromCookies();
+    try {
+        const response = await fetch('https://api.spotify.com/v1/me/player/play', {
+            method: 'PUT',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                uris: [trackUri]
+            })
+        });
+        const data = await response.json();
+        console.log(data); // Log the response (optional)
+    } catch (error) {
+        console.error('Error playing song:', error);
+    }
+};
+
 
 // POST REQUESTS //
 

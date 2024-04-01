@@ -15,6 +15,7 @@ const BottomPlayer = () => {
 	]);
 
 	useEffect(() => {
+		console.log(currentlyPlaying);
 		setCurrentName(
 			currentlyPlaying.item ? currentlyPlaying.item.name : "For The Mind"
 		);
@@ -48,7 +49,7 @@ const BottomPlayer = () => {
 				</div>
 			</div>
 				<MusicController />
-			<MusicSecondaryController volumeProp={100} />
+			<MusicSecondaryController />
 		</div>
 	);
 };

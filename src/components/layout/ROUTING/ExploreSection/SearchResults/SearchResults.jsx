@@ -8,8 +8,9 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
+    const limitParam = limit > 50 ? 50 : limit;
     const formattedFilters = encodeURIComponent(filters);
-    SearchForItems(query, formattedFilters, limit, market, offset).then((res) => {
+    SearchForItems(query, formattedFilters, limitParam, market, offset).then((res) => {
       setSearchResults(res);
     });
   }, [query, filters, limit, market, offset]);

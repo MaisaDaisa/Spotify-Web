@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { PlaySpecificSong } from "../../../../../lib/API/getInfo";
+import { PlaySpecificSongInPlaylist } from "../../../../../lib/API/getInfo";
 import { GlobalContext } from "../../../MainLayout/MainLayout.jsx";
 
 export const PlaylistItemsDisplay = ({ Track, index, playlistUri }) => {
@@ -11,7 +11,7 @@ export const PlaylistItemsDisplay = ({ Track, index, playlistUri }) => {
 	const handlePlayClick = async () => {
 		try {
 			console.log("Playing specific song", Track.track.uri);
-			PlaySpecificSong(playlistUri, index)
+			PlaySpecificSongInPlaylist(playlistUri, Track.track.uri)
 			setTimeout(() => {
 				initCurrentTracks();
 			}, 1000);

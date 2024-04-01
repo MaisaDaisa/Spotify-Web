@@ -4,6 +4,7 @@ import ProfileTop from "./../../../ProfileTop/ProfileTop.jsx";
 import { GetUsersSavedAlbums } from "../../../../lib/API/getInfo.js";
 import { HorizSliderSec } from "./HorizSliderSec/HorizSliderSec.jsx";
 import { fetchTopItems } from "../../../../lib/API/getInfo.js";
+import  AlbumDisplayCover  from "./../../../AlbumDisplayCover/AlbumDisplayCover.jsx";
 
 const DisplaySection = ({ additionalClass }) => {
 	const [usersSavedAlbums, setUsersSavedAlbums] = useState([]);
@@ -23,13 +24,12 @@ const DisplaySection = ({ additionalClass }) => {
 			<HorizSliderSec title={"Your Saved Albums"}>
 				{usersSavedAlbums[0] ? usersSavedAlbums.map((album) => {
 					return (
-						<TrackCovers
+						<AlbumDisplayCover
 							key={album.album.uri}
 							imgSrc={album.album.images[0].url}
 							name={album.album.name}
 							artists={album.album.artists}
-							uri = {album.album.id}
-							type={album.album.type}
+							uri = {album.album.uri}
 						/>
 					);
 				}) : <div></div>}
@@ -42,8 +42,7 @@ const DisplaySection = ({ additionalClass }) => {
 							imgSrc={track.album.images[0].url}
 							name={track.name}
 							artists={track.artists}
-							uri = {track.id}
-							type={track.type}
+							uri = {track.uri}
 						/>
 					);
 				}) : <div></div>}
