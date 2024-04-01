@@ -1,14 +1,14 @@
 import { getToken, refreshSpotifyToken } from "./authorize";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
+import { Cookies, useCookies } from "react-cookie";
 
 function dealWithToken(code) {
 	const [expiresIn, setExpiresIn] = useState(0);
 	const [refreshTokenLocal, setRefreshTokenLocal] = useState("");
 	const [accessToken, setAccessToken] = useState("");
 	const [stampDate, setStampDate] = useState(0);
-	const [infoCookies, setInfoCookie] = useCookies(["spotiCookies"]);
-	const [tokeCookies, setTokenCookie] = useCookies(["Token"]);
+	const [infoCookies, setInfoCookie, removeInfoCookie] = useCookies(["spotiCookies"]);
+	const [tokeCookies, setTokenCookie, removeTokenCookie] = useCookies(["Token"]);
 
 	const saveToken = (response) => {
 		if (response.error) {
@@ -47,6 +47,8 @@ function dealWithToken(code) {
 			saveToken(response);
 		} catch (error) {
 			console.log(error);
+			removeInfoCookie(["spotiCookies"]);
+			removeTokenCookie(["Token"]);
 		}
 	};
 

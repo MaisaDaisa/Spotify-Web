@@ -9,9 +9,10 @@ export default {
     colors: {
       'background-pitch-black' : '#000000',
       'overlay-black' : '#1B1A1A',
+      'secondary-gray' : '#333333',
       'default-font' : '#E5E5E5',
       'secondary-font': '#BCBCBC',
-      'spoti-green': '#52D7BF',
+      'spoti-green': '#1db954',
       'spoti-red': '#db0000'
     },
   },

@@ -6,100 +6,31 @@ export const getTokenFromCookies = () => {
 	return token ? token.replace(name, "") : "";
 };
 
-export async function fetchProfile() {
+const fetchWithToken = async (url, method = "GET") => {
 	const token = getTokenFromCookies();
-	const response = await fetch("https://api.spotify.com/v1/me", {
-		method: "GET",
+	const response = await fetch(url, {
+		method: method,
 		headers: { Authorization: `Bearer ${token}` },
 	});
+
 	if (!response.ok) {
-		throw new Error("Failed to fetch user profile");
+		throw new Error(`Failed to fetch ${url}`);
 	}
 
 	return await response.json();
-}
+};
 
-export async function fetchUserPlaylists() {
-	const token = getTokenFromCookies();
-	const response = await fetch("https://api.spotify.com/v1/me/playlists", {
-		method: "GET",
-		headers: { Authorization: `Bearer ${token}` },
-	});
-	if (!response.ok) {
-		throw new Error("Failed to fetch user playlists");
-	}
-
-	return await response.json();
-}
-
-export async function GetCurrentlyPlayingTrack() {
-	const token = getTokenFromCookies();
-	const response = await fetch(
-		"https://api.spotify.com/v1/me/player/currently-playing",
-		{
-			method: "GET",
-			headers: { Authorization: `Bearer ${token}` },
-		}
-	);
-	if (!response.ok) {
-		throw new Error("Failed to fetch user current track");
-	}
-
-	return await response.json();
-}
-
-export async function fetchUserProfile() {
-	const token = getTokenFromCookies();
-	const response = await fetch("https://api.spotify.com/v1/me", {
-		method: "GET",
-		headers: { Authorization: `Bearer ${token}` },
-	});
-	if (!response.ok) {
-		throw new Error("Failed to fetch user profile");
-	}
-
-	return await response.json();
-}
-
-export async function GetUsersSavedAlbums() {
-	const token = getTokenFromCookies();
-	const response = await fetch("https://api.spotify.com/v1/me/albums", {
-		method: "GET",
-		headers: { Authorization: `Bearer ${token}` },
-	});
-	if (!response.ok) {
-		throw new Error("Failed to fetch user saved albums");
-	}
-
-	return await response.json();
-}
-
-export async function fetchTopItems(type, timeRange = 'medium_term', limit = 20, offset = 0, token) {
-    const url = `https://api.spotify.com/v1/me/top/${type}?time_range=${timeRange}&limit=${limit}&offset=${offset}`;
-	console.log(url);
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
-
-    if (!response.ok) {
-        throw new Error(`Failed to fetch top ${type}`);
-    }
-
-    return await response.json();
-}
-
-
-export async function GetPlaylist(id, market="GE") {
+export async function GetPlaylist(id, market = "GE") {
 	const token = getTokenFromCookies();
 
 	try {
-		const response = await fetch(`https://api.spotify.com/v1/playlists/${id}?market=${market}`, {
-			method: "GET",
-			headers: { Authorization: `Bearer ${token}` },
-		});
+		const response = await fetch(
+			`https://api.spotify.com/v1/playlists/${id}?market=${market}`,
+			{
+				method: "GET",
+				headers: { Authorization: `Bearer ${token}` },
+			}
+		);
 
 		if (!response.ok) {
 			throw new Error("Failed to fetch playlist");
@@ -113,117 +44,144 @@ export async function GetPlaylist(id, market="GE") {
 	}
 }
 
-export async function GetUser(id) {
-	const token = getTokenFromCookies();
-
-	try {
-		const response = await fetch(`https://api.spotify.com/v1/users/${id}`, {
-			method: "GET",
-			headers: { Authorization: `Bearer ${token}` },
-		});
-
-		if (!response.ok) {
-			throw new Error("Failed to fetch user");
-		}
-
-		const data = await response.json();
-		return data; // Return just the name of the user
-	} catch (error) {
-		console.error("Error fetching user:", error);
-		throw error;
-	}
+export async function SearchForItems(
+	query,
+	type,
+	limit = 20,
+	market = "GE",
+	offset = 0
+) {
+	const url = `https://api.spotify.com/v1/search?q=${query}${
+		type === "" ? "" : `&type=${type}`
+	}${limit ? `&limit=${limit}` : ""}${market ? `&market=${market}` : ""}${
+		offset ? `&offset=${offset}` : ""
+	}`;
+	console.log(url);
+	return await fetchWithToken(url);
 }
 
+export async function GetUser(id) {
+	return await fetchWithToken(`https://api.spotify.com/v1/users/${id}`);
+}
+
+export async function fetchTopItems(
+	type,
+	timeRange = "medium_term",
+	limit = 20,
+	offset = 0
+) {
+	return await fetchWithToken(
+		`https://api.spotify.com/v1/me/top/${type}?time_range=${timeRange}&limit=${limit}&offset=${offset}`
+	);
+}
+
+export async function fetchProfile() {
+	return await fetchWithToken("https://api.spotify.com/v1/me");
+}
+
+export async function fetchUserPlaylists() {
+	return await fetchWithToken("https://api.spotify.com/v1/me/playlists");
+}
+
+export async function GetCurrentlyPlayingTrack() {
+	return await fetchWithToken(
+		"https://api.spotify.com/v1/me/player/currently-playing"
+	);
+}
+
+export async function fetchUserProfile() {
+	return await fetchWithToken("https://api.spotify.com/v1/me");
+}
+
+export async function GetUsersSavedAlbums() {
+	return await fetchWithToken("https://api.spotify.com/v1/me/albums");
+}
+
+export async function GetSeveralBrowseCategories(nextLink) {
+	const link = nextLink
+		? nextLink
+		: `https://api.spotify.com/v1/browse/categories?limit=20`;
+	return await fetchWithToken(link);
+}
 
 // API PUT REQUESTS //
 
-export function SeekToPosition(time) {
+const putWithToken = async (url) => {
 	const token = getTokenFromCookies();
-	const result = fetch(
-		`https://api.spotify.com/v1/me/player/seek?position_ms=${time}`,
-		{
-			method: "PUT",
-			headers: { Authorization: `Bearer ${token}` },
-		}
-	);
+	const result = await fetch(url, {
+		method: "PUT",
+		headers: { Authorization: `Bearer ${token}` },
+	});
+
+	if (!result.ok) {
+		throw new Error(`Failed to PUT ${url}`);
+	}
+
 	return result;
+};
+
+export function SeekToPosition(time) {
+	return putWithToken(
+		`https://api.spotify.com/v1/me/player/seek?position_ms=${time}`
+	);
 }
 
 export function PauseSong() {
-	const token = getTokenFromCookies();
-	const result = fetch("https://api.spotify.com/v1/me/player/pause", {
-		method: "PUT",
-		headers: { Authorization: `Bearer ${token}` },
-	});
-	return result;
+	return putWithToken("https://api.spotify.com/v1/me/player/pause");
 }
 
 export function PlaySong() {
-	const token = getTokenFromCookies();
-	const result = fetch("https://api.spotify.com/v1/me/player/play", {
-		method: "PUT",
-		headers: { Authorization: `Bearer ${token}` },
-	});
-	return result;
+	return putWithToken("https://api.spotify.com/v1/me/player/play");
 }
-
 
 export function volumeControl(volume) {
-	const token = getTokenFromCookies();
-	const result = fetch(
-		`https://api.spotify.com/v1/me/player/volume?volume_percent=${volume}`,
-		{
-			method: "PUT",
-			headers: { Authorization: `Bearer ${token}` },
-		}
+	return putWithToken(
+		`https://api.spotify.com/v1/me/player/volume?volume_percent=${volume}`
 	);
-	return result;
 }
 
+export const PlaySpecificSong = async (
+	contextUri,
+	offsetPosition = 0,
+	positionMs = 0
+) => {
+	const token = getTokenFromCookies();
+	const url = "https://api.spotify.com/v1/me/player/play";
+	const data = {
+		context_uri: contextUri,
+		offset: { position: offsetPosition },
+		position_ms: positionMs,
+	};
 
-export const PlaySpecificSong = async (contextUri, offsetPosition = 0, positionMs = 0) => {
-    const token = getTokenFromCookies();
-    const url = 'https://api.spotify.com/v1/me/player/play';
+	const response = await fetchWithToken(url, "PUT", JSON.stringify(data));
 
-    const data = {
-        context_uri: contextUri,
-        offset: { position: offsetPosition },
-        position_ms: positionMs,
-    };
+	if (!response.ok) {
+		throw new Error("Failed to play context");
+	}
 
-    const response = await fetch(url, {
-        method: 'PUT',
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    });
-
-    if (!response.ok) {
-        throw new Error('Failed to play context');
-    }
-
-    return await response.json();
+	return await response.json();
 };
-
 
 // POST REQUESTS //
 
-export function SkipToPrevious() {
+const postWithToken = async (url) => {
 	const token = getTokenFromCookies();
-	const result = fetch("https://api.spotify.com/v1/me/player/previous", {
+	const result = await fetch(url, {
 		method: "POST",
 		headers: { Authorization: `Bearer ${token}` },
 	});
+
+	if (!result.ok) {
+		throw new Error(`Failed to POST ${url}`);
+	}
+
 	return result;
+};
+
+export function SkipToPrevious() {
+	return postWithToken("https://api.spotify.com/v1/me/player/previous");
 }
 
 export function SkipToNext() {
-	const token = getTokenFromCookies();
-	const result = fetch("https://api.spotify.com/v1/me/player/next", {
-		method: "POST",
-		headers: { Authorization: `Bearer ${token}` },
-	});
-	return result;
+	return postWithToken("https://api.spotify.com/v1/me/player/next");
 }

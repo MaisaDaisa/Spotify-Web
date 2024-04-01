@@ -18,7 +18,6 @@ const BottomPlayer = () => {
 		setCurrentName(
 			currentlyPlaying.item ? currentlyPlaying.item.name : "For The Mind"
 		);
-		console.log(currentName);
 		setCurrentArtist(
 			currentlyPlaying.item
 				? currentlyPlaying.item.artists
@@ -30,7 +29,7 @@ const BottomPlayer = () => {
 	}, [currentlyPlaying]);
 
 	return (
-		<div className="w-full h-1/12 grid grid-cols-3 bg-overlay-black p-3 rounded-3xl">
+		<div className="w-full h-fit grid grid-cols-3 bg-overlay-black p-3 rounded-3xl">
 			<div className="flex flex-row gap-4 items-center flex-1">
 				<img
 					src={currentlyAlbum}

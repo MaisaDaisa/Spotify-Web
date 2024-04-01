@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
@@ -7,11 +7,12 @@ import { faUsers, faUser } from "@fortawesome/free-solid-svg-icons";
 
 import { ProfileContext } from "../layout/MainLayout/MainLayout";
 
-const ProfileTop = ({addClass}) => {
+const ProfileTop = ({addClass, children}) => {
 	const profile = React.useContext(ProfileContext);
    
 	return (
 		<div className={`flex flex-row ${addClass}`}>
+			{children}
 			<div className="flex flex-row gap-2">
 				<FontAwesomeIcon
 					icon={faBell}

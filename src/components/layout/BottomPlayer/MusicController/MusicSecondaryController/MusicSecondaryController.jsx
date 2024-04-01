@@ -7,6 +7,7 @@ import {
 	faVolumeHigh,
 } from "@fortawesome/free-solid-svg-icons";
 import { volumeControl } from "../../../../../lib/API/getInfo";
+import './MusicSecondaryController.css';
 
 const MusicSecondaryController = ({volumeProp}) => {
 	const [volume, setVolume] = useState(volumeProp);
@@ -60,8 +61,9 @@ const MusicSecondaryController = ({volumeProp}) => {
 				defaultValue={volume}
 				step={1}
 				onClick={(e) => handleVolume(e)}
-				className="w-36"
+				className="w-36 volume-slider"
 			/>
+
 		</div>
 	);
 };

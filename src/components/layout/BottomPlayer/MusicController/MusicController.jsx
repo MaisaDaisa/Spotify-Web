@@ -50,7 +50,6 @@ const MusicController = () => {
 	}, [timeIntoSong]);
 
 	useEffect(() => {
-		console.log(Playing);
 		if (Playing === true) {
 			createInterval();
 		} else {
@@ -139,7 +138,7 @@ const MusicController = () => {
 					className="cursor-pointer w-7 h-7"
 				/>
 			</div>
-			<div className="flex flex-row flex-nowrap gap-4 w-full">
+			<div className="flex flex-row items-center flex-nowrap gap-4 w-full">
 				{ currentlyPlaying.item ? (
 					<MusicDurationController
 					time={timeIntoSong}
@@ -161,7 +160,7 @@ const MusicController = () => {
 					max={totalTime}
 					value={timeIntoSong}
 					step={1}
-					className="progress-slider"
+					className="progress-slider spotify-range-slider"
 					onChange={(e) => {
 						handleTimePosition(e);
 					}}

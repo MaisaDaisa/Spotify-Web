@@ -1,8 +1,8 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { PlaySpecificSong } from "../../../../../../lib/API/getInfo";
-import { GlobalContext } from "../../../../MainLayout/MainLayout.jsx";
+import { PlaySpecificSong } from "../../../../../lib/API/getInfo";
+import { GlobalContext } from "../../../MainLayout/MainLayout.jsx";
 
 export const PlaylistItemsDisplay = ({ Track, index, playlistUri }) => {
 	const [isHovered, setIsHovered] = React.useState(false);

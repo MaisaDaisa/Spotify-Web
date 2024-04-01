@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import ProfileTop from "../../../../ProfileTop/ProfileTop.jsx";
+import ProfileTop from "../../../ProfileTop/ProfileTop.jsx";
 import { useParams } from "react-router-dom";
-import { GetPlaylist, GetUser } from "../../../../../lib/API/getInfo.js";
+import { GetPlaylist, GetUser } from "../../../../lib/API/getInfo.js";
 import { PlaylistItemsDisplay } from "./PlaylistItemsDisplay/PlaylistItemsDisplay.jsx";
 
 const PlaylistSection = ({ additionalClass }) => {
@@ -44,11 +44,11 @@ const PlaylistSection = ({ additionalClass }) => {
 
 	return (
 		<div
-			className={`object-contain h-full w-full flex p-4 pl-0 flex-col rounded-2xl bg-overlay-black ${additionalClass}`}>
+			className={`w-full flex p-4 flex-col rounded-2xl overflow-hidden bg-overlay-black ${additionalClass}`}>
 			<ProfileTop addClass={"justify-end"} />
 			<div className="ml-8">
 				<div className="flex flex-row">
-					<img src={PlaylistImage} alt="playlist" className="w-48 h-48" />
+					<img src={PlaylistImage} alt="playlist" className="w-48 h-48 rounded-md" />
 					<div className="flex flex-col justify-end items-start gap-3 p-4 pb-0">
 						<h4 className="text-sm">
 							{PlaylistIsPublic ? "Public Playlist" : "Private Playlist"}
@@ -74,7 +74,7 @@ const PlaylistSection = ({ additionalClass }) => {
 					</div>
 				</div>
 			</div>
-			<div className="playlist-sidebar flex flex-col overflow-y-scroll mt-4">
+			<div className="spoti-vertial-scrollbar flex flex-col overflow-y-scroll mt-4">
 				{playlist.name ? (
 					playlistTracks
 						.filter((track) => track && track.track && track.track.is_playable) // Filter tracks where track exists and is_playable is true

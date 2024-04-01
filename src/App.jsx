@@ -20,9 +20,9 @@ function App() {
 	return (
 		<>
 			<div
-				className={`flex h-screen w-svw flex-col ${
-					!cookie.spotiCookies ? "items-center justify-center" : " "
-				} p-4 bg-background-pitch-black`}>
+				className={`flex  ${
+					!cookie.spotiCookies ? "items-center justify-center h-screen w-svw flex-col" : " "
+				} bg-background-pitch-black`}>
 				{cookie.spotiCookies ? (
 					<MainLayout />
 				) : (

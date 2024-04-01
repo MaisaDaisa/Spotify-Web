@@ -1,0 +1,25 @@
+.volume-slider {
+    -webkit-appearance: none;
+    height: 10px;
+    background-color: #333333;
+    border-radius: 5px;
+    outline: none;
+  }
+  
+  .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: #1db954;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+  
+  .volume-slider::-webkit-slider-thumb:hover {
+    background-color: #1ed760;
+  }
+  
+  
