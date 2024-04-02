@@ -5,26 +5,17 @@ import {
 	faVolumeOff,
 	faVolumeLow,
 	faVolumeHigh,
-	faShuffle,
 } from "@fortawesome/free-solid-svg-icons";
 import { GetAvailableDevices, volumeControl } from "../../../../../lib/API/getInfo";
 import './MusicSecondaryController.css';
-import { ToggleShuffle } from "./../../../../../lib/API/getInfo";
 
 const MusicSecondaryController = ({}) => {
-	const [shuffle, setShuffle] = useState(false);
 	const [volume, setVolume] = useState(0);
     const [lastVolume, setLastVolume] = useState(0);
 	const handleVolume = (e) => {
 		setVolume(e.target.value);
         console.log(volume, "volume");
         volumeControl(Math.round(e.target.value));
-	};
-
-	function handleShuffle(){
-		ToggleShuffle(!shuffle);
-		setShuffle(!shuffle);
-		console.log(shuffle);
 	};
 
     const handleMute = () => {
@@ -39,6 +30,7 @@ const MusicSecondaryController = ({}) => {
             volumeControl(lastVolume);
         }
     }
+
 	useEffect(() => {
 		GetAvailableDevices().then((data) => {
 			const activeDevice = data.devices.filter((device) => device.is_active);
@@ -55,9 +47,7 @@ const MusicSecondaryController = ({}) => {
 	
 	return (
 		<div className="flex flex-1 flex-row justify-end items-center gap-4 pr-4">
-			<FontAwesomeIcon icon={faShuffle} size="xl" style={{color: ( shuffle === false ? "#ffffff" : '#1db954')}}
-			className="cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out"
-			onClick={handleShuffle}/>
+
 			<div className="flex flex-row justify-start w-5">
 				<FontAwesomeIcon
 					icon={

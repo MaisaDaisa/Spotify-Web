@@ -195,6 +195,10 @@ export const PlaySpecificSong = async (trackUri) => {
     }
 };
 
+export const SetRepeatMode = async (state) => {
+	return await putWithToken(`https://api.spotify.com/v1/me/player/repeat?state=${state}`);
+}
+
 
 // POST REQUESTS //
 

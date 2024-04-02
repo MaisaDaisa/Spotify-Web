@@ -13,7 +13,8 @@ export default {
       'default-font' : '#E5E5E5',
       'secondary-font': '#BCBCBC',
       'spoti-green': '#1db954',
-      'spoti-red': '#db0000'
+      'spoti-red': '#db0000',
+      'pure-white': '#ffffff',
     },
   },
   plugins: [],

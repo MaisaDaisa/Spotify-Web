@@ -16,6 +16,8 @@ import {
 	SkipToNext,
 	SkipToPrevious,
 } from "../../../../lib/API/getInfo";
+import ShuffleButton from "../../../ShuffleButton/ShuffleButton.jsx";
+import RepeatButton from "../../../RepeatButton/RepeatButton.jsx";
 
 const MusicController = () => {
 	const { currentlyPlaying, setCurrentPlaying, initCurrentTracks } =
@@ -91,6 +93,7 @@ const MusicController = () => {
 	return (
 		<div className="flex-1 w-full flex flex-col flex-nowrap justify-center items-center gap-4">
 			<div className="flex flex-row items-center flex-nowrap gap-6">
+				<ShuffleButton size={"lg"} />
 				<FontAwesomeIcon
 					icon={faBackwardStep}
 					size="xl"
@@ -106,11 +109,12 @@ const MusicController = () => {
 				/>
 				<div
 					className="playPauseButton flex justify-center items-center cursor-pointer bg-[#ffffff] rounded-full p-1 w-12 h-12 
-							ease-in-out duration-150">
+						hover:scale-110 transition-transform duration-300 ease-in-out">
 					{Playing === true ? (
 						<FontAwesomeIcon
 							icon={faPause}
 							size="xl"
+							className=""
 							style={{ color: "#1B1A1A" }}
 							onClick={() => handlePause()}
 						/>
@@ -137,6 +141,8 @@ const MusicController = () => {
 					}}
 					className="cursor-pointer w-7 h-7"
 				/>
+				<RepeatButton size={"lg"} />
+
 			</div>
 			<div className="flex flex-row items-center flex-nowrap gap-4 w-full">
 				{ currentlyPlaying.item ? (
