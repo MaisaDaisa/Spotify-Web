@@ -63,7 +63,7 @@ const PlaylistSection = ({ additionalClass }) => {
 								<img
 									src={PlaylistCreatorPicture}
 									alt=""
-									className="w-8 w-8 rounded-full"
+									className="w-8 h-8 rounded-full"
 								/>
 								<h3 className="text-white font-bold ">
 									{PlaylistCreator.display_name}
@@ -77,10 +77,10 @@ const PlaylistSection = ({ additionalClass }) => {
 					</div>
 				</div>
 			</div>
-			<div className="spoti-vertial-scrollbar flex flex-col overflow-y-scroll mt-4">
+			<div className="spotify-vertical-scrollbar flex flex-col overflow-y-scroll mt-4">
 				{playlist.name ? (
 					playlistTracks
-						.filter((track) => track && track.track && track.track.is_playable) // Filter tracks where track exists and is_playable is true
+						.filter((track) => track && track.track && track.track.is_playable)
 						.map((track, index) => (
 							<PlaylistItemsDisplay
 								Track={track}

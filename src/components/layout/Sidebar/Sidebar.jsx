@@ -28,7 +28,7 @@ const Sidebar = ({ additionalClass }) => {
 				<SidebarNavLinks icon={faStar} title={"Favorites"} />
 			</div>
 			<h1 className="text-default-font text-xl font-lg mt-4">Your library</h1>
-			<div className="spoti-vertial-scrollbar flex flex-col w-full gap-3 items-start flex-nowrap overflow-y-scroll mt-4">
+			<div className="spotify-vertical-scrollbar flex flex-col w-full gap-3 items-start flex-nowrap overflow-y-scroll mt-4">
 				{albums.map((playlist) => {
 					return (
 						<Link to={`/playlist/${playlist.id}`} key={playlist.id}>

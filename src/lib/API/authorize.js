@@ -1,5 +1,6 @@
-const CLIENT_ID = "b4c04bfb6ac5435780ece06d2fbb3812";
-const REDIRECT_URI = "http://localhost:5173";
+
+const CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID
+const REDIRECT_URI = import.meta.env.VITE_SPOTIFY_REDIRECT_URI
 
 const generateRandomString = (length) => {
 	const possible =
@@ -94,7 +95,7 @@ export const refreshSpotifyToken = async (refresh_token) => {
 		const data = await response.json();
 		return data;
 	} catch (error) {
-		console.log('Token Aint Refreshing');
+		console.log("Token Isn't Refreshing");
 		console.log(error);
 	}
 };

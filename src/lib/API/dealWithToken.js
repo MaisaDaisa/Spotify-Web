@@ -7,7 +7,7 @@ function dealWithToken(code) {
 	const [refreshTokenLocal, setRefreshTokenLocal] = useState("");
 	const [accessToken, setAccessToken] = useState("");
 	const [stampDate, setStampDate] = useState(0);
-	const [infoCookies, setInfoCookie, removeInfoCookie] = useCookies(["spotiCookies"]);
+	const [infoCookies, setInfoCookie, removeInfoCookie] = useCookies(["spotifyCookies"]);
 	const [tokeCookies, setTokenCookie, removeTokenCookie] = useCookies(["Token"]);
 
 	const saveToken = (response) => {
@@ -16,7 +16,7 @@ function dealWithToken(code) {
 		} else {;
 			const timestamp = new Date().getTime();
 
-			setInfoCookie("spotiCookies", {
+			setInfoCookie("spotifyCookies", {
 				"refresh_token": response.refresh_token,
 				"expires_in": response.expires_in,
 				"timestamp": timestamp,
@@ -47,16 +47,16 @@ function dealWithToken(code) {
 			saveToken(response);
 		} catch (error) {
 			console.log(error);
-			removeInfoCookie(["spotiCookies"]);
+			removeInfoCookie(["spotifyCookies"]);
 			removeTokenCookie(["Token"]);
 		}
 	};
 
 	useEffect(() => {
-		if (code !== "" && !infoCookies.spotiCookies) {
+		if (code !== "" && !infoCookies.spotifyCookies) {
 			fetchToken();
-		} else if (infoCookies.spotiCookies) {
-			const { refresh_token, expires_in, timestamp } = infoCookies.spotiCookies;
+		} else if (infoCookies.spotifyCookies) {
+			const { refresh_token, expires_in, timestamp } = infoCookies.spotifyCookies;
 			const token = tokeCookies.Token;
 			setAccessToken(token);
 			setExpiresIn(expires_in);

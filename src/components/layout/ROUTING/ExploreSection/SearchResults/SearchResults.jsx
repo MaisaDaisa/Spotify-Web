@@ -20,7 +20,7 @@ const SearchResults = () => {
   }, [searchResults]);
 
   return (
-    <div className="p-6 mt-4 rounded-lg overflow-y-scroll spoti-vertial-scrollbar">
+    <div className="p-6 mt-4 rounded-lg overflow-y-scroll spotify-vertical-scrollbar">
       {searchResults.length === 0 ? (
         <div className="search-results">
           <h1>No results found</h1>

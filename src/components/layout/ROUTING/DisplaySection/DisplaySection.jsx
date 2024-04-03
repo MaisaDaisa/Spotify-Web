@@ -19,7 +19,7 @@ const DisplaySection = ({ additionalClass }) => {
 	}, []);
 	return (
 		<div
-			className={`w-full h-full flex flex-col p-4 rounded-lg overflow-y-scroll spoti-vertial-scrollbar bg-overlay-black ${additionalClass}`}>
+			className={`w-full h-full flex flex-col p-4 rounded-lg overflow-y-scroll spotify-vertical-scrollbar bg-overlay-black ${additionalClass}`}>
 			<ProfileTop addClass={"justify-end"} />
 			<HorizSliderSec title={"Your Saved Albums"}>
 				{usersSavedAlbums[0] ? usersSavedAlbums.map((album) => {

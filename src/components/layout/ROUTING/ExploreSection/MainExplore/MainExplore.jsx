@@ -27,7 +27,7 @@ const MainExplore = () => {
     }, [categories])
 
   return (
-    <div className='given-categories p-6 mt-4 rounded-lg overflow-y-scroll spoti-vertial-scrollbar'>
+    <div className='given-categories p-6 mt-4 rounded-lg overflow-y-scroll spotify-vertical-scrollbar'>
         <h1 className='text-2xl font-semibold'>Browse All</h1>
         <div className="flex flex-wrap flex-row justify-between gap-6 mt-4">
             { categories.categories ? categories.categories.items.map((category) => {

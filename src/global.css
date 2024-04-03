@@ -27,15 +27,15 @@
 
 /* Vertical Scrollbar */
 
-.spoti-vertial-scrollbar::-webkit-scrollbar {
+.spotify-vertical-scrollbar::-webkit-scrollbar {
     width: 2px;
     cursor: pointer;
 }
-.spoti-vertial-scrollbar::-webkit-scrollbar-track {
+.spotify-vertical-scrollbar::-webkit-scrollbar-track {
     background-color: #000000;
     cursor: pointer;
 }
-.spoti-vertial-scrollbar::-webkit-scrollbar-thumb {
+.spotify-vertical-scrollbar::-webkit-scrollbar-thumb {
     cursor: pointer;
     background-color: #1DB954;
 }

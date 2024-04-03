@@ -14,7 +14,7 @@ const MusicSecondaryController = ({}) => {
     const [lastVolume, setLastVolume] = useState(0);
 	const handleVolume = (e) => {
 		setVolume(e.target.value);
-        console.log(volume, "volume");
+
         volumeControl(Math.round(e.target.value));
 	};
 

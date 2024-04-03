@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import Nas from "../../assets/images/nas.jpg";
 import { useNavigate } from "react-router-dom";
 
-const PlaylistDisplayCover = (name, imgSrc, id) => {
+const PlaylistDisplayCover = ({name, imgSrc, id}) => {
 	const navigate = useNavigate()
 	const [ stateName, setName ] = useState(name);
 	const [ stateImgSrc, setImgSrc ] = useState(imgSrc);
 	const [ stateId, setId ] = useState(id);
-
-	// console.log(stateName, stateImgSrc, stateId)
 
 	function handleClick() {
 		navigate(`/playlist/${stateId}`)
@@ -23,7 +21,7 @@ const PlaylistDisplayCover = (name, imgSrc, id) => {
 			/>
 			<div className="flex flex-col w-[160px] gap-1">
 				<h1 className="text-default-font text-md  overflow-x-scroll text-nowrap bottom-player-text">
-					By {stateName ? "for The Mind" : "For the mind"}
+					By {name}
 				</h1>
 				<div className="flex flex-row gap-1 overflow-x-scroll text-nowrap bottom-player-text">
 				</div>

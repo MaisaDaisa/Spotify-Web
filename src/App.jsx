@@ -7,7 +7,7 @@ import "./index.css";
 
 
 function App() {
-	const [cookie] = useCookies(["spotiCookies"]);
+	const [cookie] = useCookies(["spotifyCookies"]);
 	let code = "";
 	const searchParams = new URLSearchParams(window.location.search);
 	const codeParam = searchParams.get("code");
@@ -21,9 +21,9 @@ function App() {
 		<>
 			<div
 				className={`flex  ${
-					!cookie.spotiCookies ? "items-center justify-center h-screen w-svw flex-col" : " "
+					!cookie.spotifyCookies ? "items-center justify-center h-screen w-svw flex-col" : " "
 				} bg-background-pitch-black`}>
-				{cookie.spotiCookies ? (
+				{cookie.spotifyCookies ? (
 					<MainLayout />
 				) : (
 					<button className="p-3 bg-green-500" onClick={authorize}>

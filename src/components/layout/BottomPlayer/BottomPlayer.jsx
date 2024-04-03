@@ -15,7 +15,6 @@ const BottomPlayer = () => {
 	]);
 
 	useEffect(() => {
-		console.log(currentlyPlaying);
 		setCurrentName(
 			currentlyPlaying.item ? currentlyPlaying.item.name : "For The Mind"
 		);

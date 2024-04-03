@@ -1,26 +1,25 @@
 import React, { useEffect } from "react";
 import ProfileTop from "../../../ProfileTop/ProfileTop";
 import SearchBar from "../../../SearchBar/SearchBar";
-import { Routes, Route, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Routes, Route, useNavigate } from "react-router-dom";
 import MainExplore from "./MainExplore/MainExplore";
 import SearchResults from "./SearchResults/SearchResults";
 
 const ExploreSection = ({ additionalClass }) => {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   function initSearch(query, filters) {
     if (query === "") {
-      navigate("/explore"); // Navigate to the main explore page if the query is empty
+      navigate("/explore"); 
     } else {
       let filtersQuery = "";
       if (Array.isArray(filters)) {
-        console.log("array");
         filtersQuery = filters.join("%2C");
       } else 
       if (filters === "album" || filters === "artist" || filters === "playlist" || filters === "track") {
         filtersQuery = filters;
       } 
-      navigate(`/explore/${query}/${filtersQuery}`); // Navigate to the search results page
+      navigate(`/explore/${query}/${filtersQuery}`);
     }
   }
 
