@@ -1,6 +1,6 @@
 # Spotify Web
 
-This is a Project that works with the spotify API which mimmics the purpose of the Desktop Spotify. This Sadly only runs if you are part of my Spotify Developer group and have Spotify Premium.
+This Project works with the Spotify API which mimics the purpose of the Desktop Spotify. This Sadly only runs if you are part of my Spotify Developer group and have Spotify Premium.
 
 ## Demo
 
@@ -40,12 +40,12 @@ Start the server
 
 ## Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file. These variables can be found in your Spotify Developer settings
+To run this project, you must add the following environment variables to your .env file. These variables can be found in your Spotify Developer settings
 
-can be seen in the spotify dev app settings:
+can be seen in the Spotify dev app settings:
 `VITE_SPOTIFY_CLIENT_ID`
 
-must be configured in the spotify apps:
+must be configured in the Spotify apps:
 `VITE_SPOTIFY_REDIRECT_URI`
 
 
