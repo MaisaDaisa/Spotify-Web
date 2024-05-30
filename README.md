@@ -4,7 +4,8 @@ This Project works with the Spotify API which mimics the purpose of the Desktop 
 
 ## Demo
 
-https://geoauto.netlify.app/login
+Due to how Auth is handled, netlify does not work with the program
+https://spotify-maisadaisa-web.netlify.app
 
 ## Run Locally
 
