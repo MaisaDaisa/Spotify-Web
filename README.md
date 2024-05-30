@@ -46,8 +46,15 @@ To run this project, you must add the following environment variables to your .e
 can be seen in the Spotify dev app settings:
 `VITE_SPOTIFY_CLIENT_ID`
 
-must be configured in the Spotify apps:
+must be configured in the Spotify Developer apps:
 `VITE_SPOTIFY_REDIRECT_URI`
+for example, to run locally you will need the:
+
+```
+http://localhost:4173
+http://localhost:5173
+```
+
 
 
 
